@@ -1,5 +1,5 @@
 # Cortablo-Engine
-Game-Engine von Cortablo, welche OpenGL unterstützt.
+Game-Engine von Cortablo, welche OpenGL 3.3+ unterstützt.
 
 # Geplannte Funktionen
 Vulkan-Support<br>
