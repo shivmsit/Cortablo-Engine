@@ -17,7 +17,7 @@ Template::Template()
 	m_Map = new Map("src/template/maps/template.json");
 	m_WorldRenderer->Add(m_Map->GetGameObjects());
 
-	m_Camera = new PerspectiveCamera(45.0f, 16.0f / 9.0f, glm::vec3(0.0f), glm::vec3(0.0f));
+	m_Camera = new PerspectiveCamera(45.0f, 16.0f / 9.0f, glm::vec3(0.0f, 0.0f, -5.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 	m_MainShader->SetUniformMatrix4fv("projectionMatrix", m_Camera->GetProjectionMatrix());
 
 	m_RenderCommand = RenderCommand::Init();

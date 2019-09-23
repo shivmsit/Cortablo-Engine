@@ -210,9 +210,13 @@
     <None Include="src\template\maps\template.json" />
     <None Include="src\template\models\template.mdl" />
     <None Include="src\template\config.json" />
-    <None Include="src\template\models\error.mdl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\CortabloEngine-ToDo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="src\template\textures\template.png">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -46,15 +46,11 @@ ObjModel::ObjModel(const std::string& filePath)
 
 			sscanf_s(line.substr(2).c_str(), "%d/%d/%d %d/%d/%d %d/%d/%d\n", &face[0], &face[1], &face[2], &face[3], &face[4], &face[5], &face[6], &face[7], &face[8]);
 
-			m_Faces.push_back(face[0]);
-			m_Faces.push_back(face[1]);
-			m_Faces.push_back(face[2]);
-			m_Faces.push_back(face[3]);
-			m_Faces.push_back(face[4]);
-			m_Faces.push_back(face[5]);
-			m_Faces.push_back(face[6]);
-			m_Faces.push_back(face[7]);
-			m_Faces.push_back(face[8]);
+			for (unsigned int i = 0; i < 9; i++)
+			{
+				face[i]--;
+				m_Faces.push_back(face[i]);
+			}
 		}
 	}
 	printf("[Model] (%s) Model loaded!\n", __FUNCTION__);
@@ -67,22 +63,18 @@ ObjModel::ObjModel(const std::string& filePath)
 	if (m_Vertices.empty())
 	{
 		printf("[Model] (%s) This model has no vertices!\n", __FUNCTION__);
-		return;
 	}
 	if (m_UVs.empty())
 	{
 		printf("[Model] (%s) This model has no UVs!\n", __FUNCTION__);
-		return;
 	}
 	if (m_Normals.empty())
 	{
 		printf("[Model] (%s) This model has no Normals!\n", __FUNCTION__);
-		return;
 	}
 	if (m_Faces.empty())
 	{
 		printf("[Model] (%s) This model has no Faces!\n", __FUNCTION__);
-		return;
 	}
 }
 

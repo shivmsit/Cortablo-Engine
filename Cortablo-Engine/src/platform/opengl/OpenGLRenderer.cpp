@@ -61,8 +61,8 @@ void OpenGLRenderer::Render()
 			if (!m_RendererQueue[i]->GetModel()->GetNormals().empty())
 				glEnableVertexAttribArray(2);
 
-#if 0
-			m_IBO = IndexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetIndices().front(), (unsigned int)m_RendererQueue[i]->GetModel()->GetIndices().size() * sizeof(unsigned int));
+#if 1
+			m_IBO = IndexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetFaces().front(), (unsigned int)m_RendererQueue[i]->GetModel()->GetFaces().size() * sizeof(unsigned int));
 #endif
 
 			m_ModelMatrix = glm::translate(glm::mat4(1.0f), m_RendererQueue[i]->GetPosition());
@@ -71,8 +71,8 @@ void OpenGLRenderer::Render()
 			m_ModelMatrix = glm::scale(m_ModelMatrix, m_RendererQueue[i]->GetScale());
 			m_Shader->SetUniformMatrix4fv("modelMatrix", m_ModelMatrix);
 
-#if 0
-			glDrawElements(GL_TRIANGLES, (unsigned int)m_RendererQueue[i]->GetModel()->GetIndices().size(), GL_UNSIGNED_INT, NULL);
+#if 1
+			glDrawElements(GL_TRIANGLES, (unsigned int)m_RendererQueue[i]->GetModel()->GetFaces().size(), GL_UNSIGNED_INT, NULL);
 #else
 			glDrawArrays(GL_TRIANGLES, 0, (unsigned int)m_RendererQueue[i]->GetModel()->GetVertices().size());
 #endif
@@ -83,7 +83,7 @@ void OpenGLRenderer::Render()
 			if (!m_RendererQueue[i]->GetModel()->GetNormals().empty())
 				glDisableVertexAttribArray(2);
 
-#if 0
+#if 1
 			m_IBO->Unbind();
 #endif
 			m_VBO->Unbind();

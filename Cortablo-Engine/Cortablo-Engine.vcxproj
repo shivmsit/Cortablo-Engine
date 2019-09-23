@@ -198,13 +198,15 @@
   <ItemGroup>
     <None Include="src\template\config.json" />
     <None Include="src\template\maps\template.json" />
-    <None Include="src\template\models\error.mdl" />
     <None Include="src\template\models\template.mdl" />
     <None Include="src\template\shaders\mainFragment.glsl" />
     <None Include="src\template\shaders\mainVertex.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\CortabloEngine-ToDo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="src\template\textures\template.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
