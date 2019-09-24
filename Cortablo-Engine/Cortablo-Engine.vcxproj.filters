@@ -209,8 +209,6 @@
     <None Include="src\template\models\template.mdl" />
     <None Include="src\template\shaders\mainFragment.glsl" />
     <None Include="src\template\shaders\mainVertex.glsl" />
-    <None Include="src\template\models\bunny.mdl" />
-    <None Include="src\template\models\monkey.mdl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\CortabloEngine-ToDo.txt" />
