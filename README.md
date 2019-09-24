@@ -1,6 +1,8 @@
 # Cortablo-Engine
 Game-Engine von Cortablo, welche OpenGL 3.3+ unterstützt.
 
+### Diese Engine darf von jedem verwendet werden, solange dies ein nicht kommerzielles-Projekt ist. ###
+
 # ToDo
 - CMake einrichten.
 
