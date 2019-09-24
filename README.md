@@ -2,10 +2,10 @@
 Game-Engine von Cortablo, welche OpenGL 3.3+ unterstützt.
 
 # Geplannte Funktionen
-Vulkan-Support<br>
+- Vulkan-Support<br>
 
 # Bekannte Probleme
--
+- Wavefront-Model UVs nicht korrekt.
 
 # Dependencies
 SDL2 -> https://www.libsdl.org<br>
