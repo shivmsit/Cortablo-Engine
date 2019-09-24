@@ -42,14 +42,23 @@ ObjModel::ObjModel(const std::string& filePath)
 		}
 		else if (line.substr(0, 2) == "f ")
 		{
-			unsigned int face[9] = { };
+			unsigned int vertexIndex[3] = { };
+			unsigned int uvIndex[3] = { };
+			unsigned int normalIndex[3] = { };
 
-			sscanf_s(line.substr(2).c_str(), "%d/%d/%d %d/%d/%d %d/%d/%d\n", &face[0], &face[1], &face[2], &face[3], &face[4], &face[5], &face[6], &face[7], &face[8]);
+			if (sscanf_s(line.substr(2).c_str(), "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vertexIndex[0], &uvIndex[0], &normalIndex[0], &vertexIndex[1], &uvIndex[1], &normalIndex[1], &vertexIndex[2], &uvIndex[2], &normalIndex[2]) == 9);
+			else if (sscanf_s(line.substr(2).c_str(), "%d %d %d\n", &vertexIndex[0], &vertexIndex[1], &vertexIndex[2]) == 3);
+			else if (sscanf_s(line.substr(2).c_str(), "%d//%d %d//%d %d//%d\n", &vertexIndex[0], &normalIndex[0], &vertexIndex[1], &normalIndex[1], &vertexIndex[2], &normalIndex[2]));
+			else printf("[Model] (%s) Error: Format not supported!\n", __FUNCTION__);
 
-			for (unsigned int i = 0; i < 9; i++)
+			for (unsigned int i = 0; i < 3; i++)
 			{
-				face[i]--;
-				m_Faces.push_back(face[i]);
+				vertexIndex[i]--;
+				uvIndex[i]--;
+				normalIndex[i]--;
+				m_VertexIndices.push_back(vertexIndex[i]);
+				m_UVIndices.push_back(uvIndex[i]);
+				m_NormalIndices.push_back(normalIndex[i]);
 			}
 		}
 	}
@@ -58,24 +67,22 @@ ObjModel::ObjModel(const std::string& filePath)
 	printf("[Model] (%s) -> Vertices: %d\n", __FUNCTION__, m_Vertices.size());
 	printf("[Model] (%s) -> UVs: %d\n", __FUNCTION__, m_UVs.size());
 	printf("[Model] (%s) -> Normals: %d\n", __FUNCTION__, m_Normals.size());
-	printf("[Model] (%s) -> Faces: %d\n", __FUNCTION__, m_Faces.size());
+	printf("[Model] (%s) -> Vertex-Indices: %d\n", __FUNCTION__, m_VertexIndices.size());
+	printf("[Model] (%s) -> UV-Indices: %d\n", __FUNCTION__, m_UVIndices.size());
+	printf("[Model] (%s) -> Normal-Indices: %d\n", __FUNCTION__, m_NormalIndices.size());
 
 	if (m_Vertices.empty())
-	{
 		printf("[Model] (%s) This model has no vertices!\n", __FUNCTION__);
-	}
 	if (m_UVs.empty())
-	{
 		printf("[Model] (%s) This model has no UVs!\n", __FUNCTION__);
-	}
 	if (m_Normals.empty())
-	{
 		printf("[Model] (%s) This model has no Normals!\n", __FUNCTION__);
-	}
-	if (m_Faces.empty())
-	{
-		printf("[Model] (%s) This model has no Faces!\n", __FUNCTION__);
-	}
+	if (m_VertexIndices.empty())
+		printf("[Model] (%s) This model has no vertex indices!\n", __FUNCTION__);
+	if (m_UVIndices.empty())
+		printf("[Model] (%s) This model has no uv indices!\n", __FUNCTION__);
+	if (m_NormalIndices.empty())
+		printf("[Model] (%s) This model has no normal indices!\n", __FUNCTION__);
 }
 
 ObjModel::~ObjModel()
@@ -83,7 +90,9 @@ ObjModel::~ObjModel()
 	m_Vertices.clear();
 	m_UVs.clear();
 	m_Normals.clear();
-	m_Faces.clear();
+	m_VertexIndices.clear();
+	m_UVIndices.clear();
+	m_NormalIndices.clear();
 }
 
 std::vector<float> ObjModel::GetVertices()
@@ -101,7 +110,18 @@ std::vector<float> ObjModel::GetNormals()
 	return m_Normals;
 }
 
-std::vector<unsigned int> ObjModel::GetFaces()
+std::vector<unsigned int> ObjModel::GetVertexIndices()
 {
-	return m_Faces;
+	return m_VertexIndices;
 }
+
+std::vector<unsigned int> ObjModel::GetUVIndices()
+{
+	return m_UVIndices;
+}
+
+std::vector<unsigned int> ObjModel::GetNormalIndices()
+{
+	return m_NormalIndices;
+}
+
