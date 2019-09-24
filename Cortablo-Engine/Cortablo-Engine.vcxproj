@@ -196,7 +196,6 @@
     <ClInclude Include="src\renderer\ObjModel.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\template\config.json" />
     <None Include="src\template\maps\template.json" />
     <None Include="src\template\models\template.mdl" />
     <None Include="src\template\shaders\mainFragment.glsl" />

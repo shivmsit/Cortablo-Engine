@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <SDL2//SDL.h>
-#include <glm//glm.hpp>
+#include <SDL2/SDL.h>
+#include <glm/glm.hpp>
 
 class Input
 {

@@ -16,7 +16,7 @@ OpenGLRenderCommand::OpenGLRenderCommand()
 	// OpenGL: Face-Culling
 	glCullFace(GL_BACK);
 	glFrontFace(GL_CW);
-	//glEnable(GL_CULL_FACE);
+	glEnable(GL_CULL_FACE);
 }
 
 OpenGLRenderCommand::~OpenGLRenderCommand()
