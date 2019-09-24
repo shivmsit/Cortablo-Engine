@@ -33,7 +33,7 @@ Map::Map(const std::string& filePath)
 
 Map::~Map()
 {
-
+	m_GameObjects.clear();
 }
 
 const std::string& Map::GetMapName()

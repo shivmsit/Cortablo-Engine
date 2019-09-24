@@ -37,13 +37,13 @@ void OpenGLRenderer::Render()
 			m_RendererQueue[i]->GetTexture()->Bind();
 
 			m_VBO = VertexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetVertices().front(), m_RendererQueue[i]->GetModel()->GetVertices().size() * sizeof(&m_RendererQueue[i]->GetModel()->GetVertices().front()));
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (const void*)0);
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (const void*)0);
 
 			m_UV = VertexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetUVs().front(), m_RendererQueue[i]->GetModel()->GetUVs().size() * sizeof(&m_RendererQueue[i]->GetModel()->GetUVs().front()));
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, (const void*)0);
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (const void*)0);
 
 			m_Normal = VertexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetNormals().front(), m_RendererQueue[i]->GetModel()->GetNormals().size() * sizeof(&m_RendererQueue[i]->GetModel()->GetNormals().front()));
-			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (const void*)0);
+			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (const void*)0);
 
 			glEnableVertexAttribArray(0);
 			glEnableVertexAttribArray(1);

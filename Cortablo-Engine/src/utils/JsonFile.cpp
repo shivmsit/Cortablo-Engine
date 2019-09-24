@@ -17,6 +17,8 @@ JsonFile::JsonFile(const std::string& filePath)
 		printf("[JSON] Error: JSON file has errors!\n");
 		printf("[JSON] %s\n", m_JsonErrors.c_str());
 	}
+
+	m_JsonFile.close();
 }
 
 JsonFile::~JsonFile()
