@@ -8,23 +8,25 @@ OpenGLContext::OpenGLContext(SDL_Window* window) : m_Window(window)
 {
 	if (!m_Window)
 	{
-		printf("[OpenGL] Error: m_SDLWindow is null!\n");
+		printf("[Context] (%s) Error: m_SDLWindow is null!\n", __FUNCTION__);
+		__debugbreak();
 	}
 	else
 	{
 		m_OpenGLContext = SDL_GL_CreateContext(m_Window);
 		if (!m_OpenGLContext)
 		{
-			printf("[OpenGL] Error: Context could not be initialized!\n");
-			printf("[OpenGL] -> %s\n", SDL_GetError());
+			printf("[Context] (%s) Error: Context could not be initialized!\n", __FUNCTION__);
+			printf("[Context] (%s) -> %s\n", __FUNCTION__, SDL_GetError());
+			__debugbreak();
 		}
 		else
 		{
-			printf("[OpenGL] Context initialized!\n");
-			printf("[OpenGL] -> GL_VENDOR: %s\n", glGetString(GL_VENDOR));
-			printf("[OpenGL] -> GL_RENDERER: %s\n", glGetString(GL_RENDERER));
-			printf("[OpenGL] -> GL_VERSION: %s\n", glGetString(GL_VERSION));
-			printf("[OpenGL] -> GL_SHADING_LANGUAGE_VERSION: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+			printf("[Context] (%s) Context initialized!\n", __FUNCTION__);
+			printf("[Context] (%s) -> GL_VENDOR: %s\n", __FUNCTION__, glGetString(GL_VENDOR));
+			printf("[Context] (%s) -> GL_RENDERER: %s\n", __FUNCTION__, glGetString(GL_RENDERER));
+			printf("[Context] (%s) -> GL_VERSION: %s\n", __FUNCTION__, glGetString(GL_VERSION));
+			printf("[Context] (%s) -> GL_SHADING_LANGUAGE_VERSION: %s\n", __FUNCTION__, glGetString(GL_SHADING_LANGUAGE_VERSION));
 		}
 	}
 }

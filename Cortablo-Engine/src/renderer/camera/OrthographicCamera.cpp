@@ -7,13 +7,13 @@
 OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top, const glm::vec3& position, float rotation)
 {
 	m_ProjectionMatrix = glm::ortho(left, right, bottom, top, 1.0f, -1.0f);
-	printf("[Camera] (Orthographic) (Left: %f, Right: %f, Bottom: %f, Top: %f)\n", left, right, bottom, top);
+	printf("[Camera] (%s) (Left: %f, Right: %f, Bottom: %f, Top: %f)\n", __FUNCTION__, left, right, bottom, top);
 
 	SetPosition(position);
-	printf("[Camera] (Orthographic) Position changed! (X: %f, Y: %f, Z: %f)\n", position.x, position.y, position.z);
+	printf("[Camera] (%s) Position changed! (X: %f, Y: %f, Z: %f)\n", __FUNCTION__, position.x, position.y, position.z);
 
 	SetRotation(rotation);
-	printf("[Camera] (Orthographic) Rotation changed! (Z: %f)\n", rotation);
+	printf("[Camera] (%s) Rotation changed! (Z: %f)\n", __FUNCTION__, rotation);
 }
 
 OrthographicCamera::~OrthographicCamera()

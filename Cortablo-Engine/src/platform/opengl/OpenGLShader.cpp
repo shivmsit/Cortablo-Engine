@@ -17,7 +17,7 @@ OpenGLShader::OpenGLShader(const std::string& vertexFilePath, const std::string&
 	std::optional<std::string> vertexShaderSource = FileSystem::ReadFile(vertexFilePath);
 	if (vertexShaderSource.has_value())
 	{
-		printf("[OpenGL] Vertex source loaded!\n");
+		printf("[Shader] (%s) Vertex source loaded!\n", __FUNCTION__);
 
 		const char* vertexShaderSrc = vertexShaderSource.value().c_str();
 
@@ -32,18 +32,20 @@ OpenGLShader::OpenGLShader(const std::string& vertexFilePath, const std::string&
 			glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &length);
 			std::vector<char> error(length);
 			glGetShaderInfoLog(vertexShader, length, &length, &error[0]);
-			printf("[OpenGL] Error: Vertex source could not be compiled!\n");
-			printf("[OpenGL] %s\n", &error[0]);
+			printf("[Shader] (%s) Error: Vertex source could not be compiled!\n", __FUNCTION__);
+			printf("[Shader] (%s) %s\n", __FUNCTION__, &error[0]);
 			glDeleteShader(vertexShader);
+			__debugbreak();
 		}
 		else
 		{
-			printf("[OpenGL] Vertex source compiled!\n");
+			printf("[Shader] (%s) Vertex source compiled!\n", __FUNCTION__);
 		}
 	}
 	else
 	{
-		printf("[OpenGL] Error: Vertex source could not be loaded!\n");
+		printf("[Shader] (%s) Error: Vertex source could not be loaded!\n", __FUNCTION__);
+		__debugbreak();
 	}
 
 	/* =============== */
@@ -55,7 +57,7 @@ OpenGLShader::OpenGLShader(const std::string& vertexFilePath, const std::string&
 	std::optional<std::string> fragmentShaderSource = FileSystem::ReadFile(fragmentFilePath);
 	if (fragmentShaderSource.has_value())
 	{
-		printf("[OpenGL] Fragment source loaded!\n");
+		printf("[Shader] (%s) Fragment source loaded!\n", __FUNCTION__);
 
 		const char* fragmentShaderSrc = fragmentShaderSource.value().c_str();
 
@@ -70,18 +72,20 @@ OpenGLShader::OpenGLShader(const std::string& vertexFilePath, const std::string&
 			glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &length);
 			std::vector<char> error(length);
 			glGetShaderInfoLog(fragmentShader, length, &length, &error[0]);
-			printf("[OpenGL] Error: Fragment source could not be compiled!\n");
-			printf("[OpenGL] %s\n", &error[0]);
+			printf("[Shader] (%s) Error: Fragment source could not be compiled!\n", __FUNCTION__);
+			printf("[Shader] (%s) %s\n", __FUNCTION__, &error[0]);
 			glDeleteShader(fragmentShader);
+			__debugbreak();
 		}
 		else
 		{
-			printf("[OpenGL] Fragment source compiled!\n");
+			printf("[Shader] (%s) Fragment source compiled!\n", __FUNCTION__);
 		}
 	}
 	else
 	{
-		printf("[OpenGL] Error: Fragment source could not be loaded!\n");
+		printf("[Shader] (%s) Error: Fragment source could not be loaded!\n", __FUNCTION__);
+		__debugbreak();
 	}
 
 	glAttachShader(shaderProgram, vertexShader);
@@ -119,7 +123,7 @@ int OpenGLShader::GetUniformLocation(const char* name)
 	GLuint uniformLocation = glGetUniformLocation(m_ShaderID, name);
 
 	if (uniformLocation == -1)
-		printf("[OpenGL] Warning: The uniform location '%s' does not exist!\n", name);
+		printf("[Shader] (%s) Warning: The uniform location '%s' does not exist!\n", __FUNCTION__, name);
 	else
 		m_UniformLocationCache[name] = uniformLocation;
 

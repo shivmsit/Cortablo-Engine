@@ -7,13 +7,13 @@
 PerspectiveCamera::PerspectiveCamera(float fov, float aspectRatio, const glm::vec3& position, const glm::vec3& rotation)
 {
 	m_ProjectionMatrix = glm::perspective(glm::radians(fov), aspectRatio, 1.0f, -1.0f);
-	printf("[Camera] (Perspective) FoV: %f\n", fov);
+	printf("[Camera] (%s) FoV: %f\n", __FUNCTION__, fov);
 
 	SetPosition(position);
-	printf("[Camera] (Perspective) Position changed! (X: %f, Y: %f, Z: %f)\n", position.x, position.y, position.z);
+	printf("[Camera] (%s) Position changed! (X: %f, Y: %f, Z: %f)\n", __FUNCTION__, position.x, position.y, position.z);
 
 	SetRotation(rotation);
-	printf("[Camera] (Perspective) Rotation changed! (X: %f, Y: %f, Z: %f)\n", rotation.x, rotation.y, rotation.z);
+	printf("[Camera] (%s) Rotation changed! (X: %f, Y: %f, Z: %f)\n", __FUNCTION__, rotation.x, rotation.y, rotation.z);
 }
 
 PerspectiveCamera::~PerspectiveCamera()

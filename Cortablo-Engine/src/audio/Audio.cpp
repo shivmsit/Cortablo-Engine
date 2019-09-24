@@ -13,7 +13,7 @@ Music::Music(const std::string & filePath)
 	if (Mix_Init(MIX_EVERYTHING) == 0)
 	{
 		printf("[Engine] Error: SDL2_Mixer could not be initialized!\n");
-		return;
+		__debugbreak();
 	}
 	else
 		printf("[Engine] SDL2_Mixer initialized!\n");
@@ -73,7 +73,7 @@ Sound::Sound(const std::string& filePath)
 	if (Mix_Init(MIX_EVERYTHING) == 0)
 	{
 		printf("[Engine] Error: SDL2_Mixer could not be initialized!\n");
-		return;
+		__debugbreak();
 	}
 	else
 		printf("[Engine] SDL2_Mixer initialized!\n");

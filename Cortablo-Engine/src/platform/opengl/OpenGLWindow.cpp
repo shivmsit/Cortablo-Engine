@@ -10,10 +10,10 @@ OpenGLWindow::OpenGLWindow(const std::string& title, int width, int height)
 	{
 		printf("[Engine] SDL2 could not be initialized!\n");
 		printf("[Engine] -> Error: %s\n", SDL_GetError());
-		return;
+		__debugbreak();
 	}
 	else
-		printf("[Engine] SDL2 initialized!\n");
+		printf("[Engine] (%s) SDL2 initialized!\n", __FUNCTION__);
 
 #ifdef __APPLE__
 	// Für NVIDIA GeForce 9600M GT unter macOS Mojave
@@ -23,16 +23,16 @@ OpenGLWindow::OpenGLWindow(const std::string& title, int width, int height)
 	m_SDLWindow = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
 	if (!m_SDLWindow)
 	{
-		printf("[Window] Error: Window could not be created!\n");
-		printf("[Window] -> Error: %s\n", SDL_GetError());
-		return;
+		printf("[Window] (%s) Error: Window could not be created!\n", __FUNCTION__);
+		printf("[Window] (%s) -> Error: %s\n", __FUNCTION__, SDL_GetError());
+		__debugbreak();
 	}
 	else
 	{
-		printf("[Window] Window created!\n");
-		printf("[Window] -> Width: %i\n", CortabloEngine::EngineParameters::Get<int>("windowWidth"));
-		printf("[Window] -> Height: %i\n", CortabloEngine::EngineParameters::Get<int>("windowHeight"));
-		printf("[Window] -> Title: %s\n", CortabloEngine::EngineParameters::Get<std::string>("windowTitle").c_str());
+		printf("[Window] (%s) Window created!\n", __FUNCTION__);
+		printf("[Window] (%s) -> Width: %i\n", __FUNCTION__, CortabloEngine::EngineParameters::Get<int>("windowWidth"));
+		printf("[Window] (%s) -> Height: %i\n", __FUNCTION__, CortabloEngine::EngineParameters::Get<int>("windowHeight"));
+		printf("[Window] (%s) -> Title: %s\n", __FUNCTION__, CortabloEngine::EngineParameters::Get<std::string>("windowTitle").c_str());
 	}
 
 	if (CortabloEngine::LaunchParameters::Check("-fullscreen"))
@@ -42,11 +42,11 @@ OpenGLWindow::OpenGLWindow(const std::string& title, int width, int height)
 
 	if (glewInit() != GLEW_OK)
 	{
-		printf("[OpenGL] Error: GLEW could not be initialized!\n");
-		return;
+		printf("[OpenGL] (%s) Error: GLEW could not be initialized!\n", __FUNCTION__);
+		__debugbreak();
 	}
 	else
-		printf("[OpenGL] GLEW initialized!\n");
+		printf("[OpenGL] (%s) GLEW initialized!\n", __FUNCTION__);
 
 	Input::m_Window = m_SDLWindow;
 	CortabloEngine::EngineParameters::Set("engineRunning", true);
@@ -89,9 +89,9 @@ void OpenGLWindow::Shutdown()
 {
 	m_Context->Shutdown();
 	SDL_DestroyWindow(m_SDLWindow);
-	printf("[Engine] Window terminated!\n");
+	printf("[Engine] (%s) Window terminated!\n", __FUNCTION__);
 	SDL_Quit();
-	printf("[Engine] SDL2 terminated!\n");
+	printf("[Engine] (%s) SDL2 terminated!\n", __FUNCTION__);
 	CortabloEngine::EngineParameters::Set("engineRunning", false);
 }
 
@@ -121,11 +121,11 @@ void OpenGLWindow::SetIcon(const std::string& filePath)
 
 	if (!surface)
 	{
-		printf("[Window] Error: Surface could not be created!\n");
+		printf("[Window] (%s) Error: Surface could not be created!\n", __FUNCTION__);
 		return;
 	}
 	else
-		printf("[Window] Surface created!\n");
+		printf("[Window] (%s) Surface created!\n", __FUNCTION__);
 
 	SDL_SetWindowIcon(m_SDLWindow, surface);
 	SDL_FreeSurface(surface);

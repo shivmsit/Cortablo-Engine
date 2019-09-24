@@ -39,19 +39,19 @@ void OpenGLRenderer::Render()
 
 			if (!m_RendererQueue[i]->GetModel()->GetVertices().empty())
 			{
-				m_VBO = VertexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetVertices().front(), (unsigned int)m_RendererQueue[i]->GetModel()->GetVertices().size() * sizeof(float));
+				m_VBO = VertexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetVertices().front(), m_RendererQueue[i]->GetModel()->GetVertices().size() * sizeof(float));
 				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (const void*)0);
 			}
 
 			if (!m_RendererQueue[i]->GetModel()->GetUVs().empty())
 			{
-				m_TexCoord = VertexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetUVs().front(), (unsigned int)m_RendererQueue[i]->GetModel()->GetUVs().size() * sizeof(float));
+				m_TexCoord = VertexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetUVs().front(), m_RendererQueue[i]->GetModel()->GetUVs().size() * sizeof(float));
 				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, (const void*)0);
 			}
 
 			if (!m_RendererQueue[i]->GetModel()->GetNormals().empty())
 			{
-				m_Normal = VertexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetNormals().front(), (unsigned int)m_RendererQueue[i]->GetModel()->GetNormals().size() * sizeof(float));
+				m_Normal = VertexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetNormals().front(), m_RendererQueue[i]->GetModel()->GetNormals().size() * sizeof(float));
 				glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (const void*)0);
 			}
 
@@ -62,7 +62,7 @@ void OpenGLRenderer::Render()
 				glEnableVertexAttribArray(2);
 
 #if 1
-			m_IBO = IndexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetFaces().front(), (unsigned int)m_RendererQueue[i]->GetModel()->GetFaces().size() * sizeof(unsigned int));
+			m_IBO = IndexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetFaces().front(), m_RendererQueue[i]->GetModel()->GetFaces().size() * sizeof(unsigned int));
 #endif
 
 			m_ModelMatrix = glm::translate(glm::mat4(1.0f), m_RendererQueue[i]->GetPosition());
@@ -72,9 +72,9 @@ void OpenGLRenderer::Render()
 			m_Shader->SetUniformMatrix4fv("modelMatrix", m_ModelMatrix);
 
 #if 1
-			glDrawElements(GL_TRIANGLES, (unsigned int)m_RendererQueue[i]->GetModel()->GetFaces().size(), GL_UNSIGNED_INT, NULL);
+			glDrawElements(GL_TRIANGLES, m_RendererQueue[i]->GetModel()->GetFaces().size(), GL_UNSIGNED_INT, NULL);
 #else
-			glDrawArrays(GL_TRIANGLES, 0, (unsigned int)m_RendererQueue[i]->GetModel()->GetVertices().size());
+			glDrawArrays(GL_TRIANGLES, 0, m_RendererQueue[i]->GetModel()->GetVertices().size());
 #endif
 
 			glDisableVertexAttribArray(0);
@@ -97,7 +97,7 @@ void OpenGLRenderer::RenderString(const std::string& text, const glm::vec3& posi
 	if (FT_Init_FreeType(&m_FreeTypeLibrary))
 	{
 		printf("[Font] Error: FreeType2 could not be initialized!\n");
-		return;
+		__debugbreak();
 	}
 	else
 	{
@@ -107,7 +107,7 @@ void OpenGLRenderer::RenderString(const std::string& text, const glm::vec3& posi
 	if (FT_New_Face(m_FreeTypeLibrary, font.GetFilePath().c_str(), 0, &m_FreeTypeFace))
 	{
 		printf("[Font] Error: FreeType2-Face could not be created!\n");
-		return;
+		__debugbreak();
 	}
 	else
 	{
@@ -121,7 +121,7 @@ void OpenGLRenderer::RenderString(const std::string& text, const glm::vec3& posi
 		if (FT_Load_Char(m_FreeTypeFace, text[i], FT_LOAD_RENDER))
 		{
 			printf("[Font] Error: Glyph could not be loaded!\n");
-			return;
+			__debugbreak();
 		}
 		//m_RendererQueue.push_back(new Plane(glm::vec3(position.x+i, position.y, position.z), glm::vec3(0.0f), glm::vec3(1.0f), new Texture(GL_LINEAR, m_FreeTypeFace->glyph->bitmap.width, m_FreeTypeFace->glyph->bitmap.rows, m_FreeTypeFace->glyph->bitmap.buffer)));
 	}
