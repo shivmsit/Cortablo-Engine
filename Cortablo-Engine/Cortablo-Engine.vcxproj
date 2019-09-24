@@ -197,6 +197,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="src\template\maps\template.json" />
+    <None Include="src\template\models\bunny.mdl" />
+    <None Include="src\template\models\monkey.mdl" />
     <None Include="src\template\models\template.mdl" />
     <None Include="src\template\shaders\mainFragment.glsl" />
     <None Include="src\template\shaders\mainVertex.glsl" />

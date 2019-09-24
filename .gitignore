@@ -341,3 +341,5 @@ healthchecksdb
 
 # Cortablo-Engine
 /Cortablo-Engine/vendor
+/Cortablo-Engine/src/template/models/monkey.mdl
+/Cortablo-Engine/src/template/models/bunny.mdl

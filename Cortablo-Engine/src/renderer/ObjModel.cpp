@@ -17,9 +17,8 @@ ObjModel::ObjModel(const std::string& filePath)
 
 			sscanf_s(line.substr(2).c_str(), "%f %f %f\n", &vertex[0], &vertex[1], &vertex[2]);
 
-			m_Vertices.push_back(vertex[0]);
-			m_Vertices.push_back(vertex[1]);
-			m_Vertices.push_back(vertex[2]);
+			for (unsigned int i = 0; i < 3; i++)
+				m_Vertices.push_back(vertex[i]);
 		}
 		else if (line.substr(0, 3) == "vt ")
 		{
@@ -27,8 +26,8 @@ ObjModel::ObjModel(const std::string& filePath)
 
 			sscanf_s(line.substr(2).c_str(), "%f %f\n", &uv[0], &uv[1]);
 
-			m_UVs.push_back(uv[0]);
-			m_UVs.push_back(uv[1]);
+			for (unsigned int i = 0; i < 2; i++)
+				m_UVs.push_back(uv[i]);
 		}
 		else if (line.substr(0, 3) == "vn ")
 		{
@@ -36,9 +35,8 @@ ObjModel::ObjModel(const std::string& filePath)
 
 			sscanf_s(line.substr(2).c_str(), "%f %f %f\n", &normal[0], &normal[1], &normal[2]);
 
-			m_Normals.push_back(normal[0]);
-			m_Normals.push_back(normal[1]);
-			m_Normals.push_back(normal[2]);
+			for (unsigned int i = 0; i < 3; i++)
+				m_Normals.push_back(normal[i]);
 		}
 		else if (line.substr(0, 2) == "f ")
 		{
@@ -56,6 +54,7 @@ ObjModel::ObjModel(const std::string& filePath)
 				vertexIndex[i]--;
 				uvIndex[i]--;
 				normalIndex[i]--;
+
 				m_VertexIndices.push_back(vertexIndex[i]);
 				m_UVIndices.push_back(uvIndex[i]);
 				m_NormalIndices.push_back(normalIndex[i]);

@@ -1,13 +1,13 @@
 #version 330 core
 
 layout (location = 0) in vec4 Position;
-layout (location = 1) in vec2 TexCoord;
+layout (location = 1) in vec2 UV;
 layout (location = 2) in vec3 Normal;
 
 out Main
 {
     vec4 Position;
-    vec2 TexCoord;
+    vec2 UV;
     vec3 Normal;
 } MainOut;
 
@@ -19,6 +19,6 @@ void main()
 {
     gl_Position = projectionMatrix * viewMatrix * modelMatrix * Position;
     MainOut.Position = modelMatrix * Position;
-    MainOut.TexCoord = TexCoord;
+    MainOut.UV = UV;
     MainOut.Normal = mat3(transpose(inverse(modelMatrix))) * Normal;
 }

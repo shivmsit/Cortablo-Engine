@@ -79,16 +79,16 @@ void PerspectiveCamera::Update()
 	if (Input::IsKeyPressed(SDL_SCANCODE_D))
 		SetPosition(GetPosition() - glm::vec3(cos(glm::radians(GetRotation().y)) * 1.0f, 0.0f, sin(glm::radians(GetRotation().y)) * 1.0f));
 	if (Input::IsKeyPressed(SDL_SCANCODE_SPACE))
-		SetPosition(GetPosition() + glm::vec3(0.0f, 1.0f, 0.0f));
-	if (Input::IsKeyPressed(SDL_SCANCODE_C))
 		SetPosition(GetPosition() - glm::vec3(0.0f, 1.0f, 0.0f));
+	if (Input::IsKeyPressed(SDL_SCANCODE_C))
+		SetPosition(GetPosition() + glm::vec3(0.0f, 1.0f, 0.0f));
 
 	if (Input::IsKeyPressed(SDL_SCANCODE_UP))
-		SetRotation(GetRotation() - glm::vec3(0.5f, 0.0f, 0.0f));
+		SetRotation(GetRotation() - glm::vec3(1.0f, 0.0f, 0.0f));
 	if (Input::IsKeyPressed(SDL_SCANCODE_DOWN))
-		SetRotation(GetRotation() + glm::vec3(0.5f, 0.0f, 0.0f));
+		SetRotation(GetRotation() + glm::vec3(1.0f, 0.0f, 0.0f));
 	if (Input::IsKeyPressed(SDL_SCANCODE_LEFT))
-		SetRotation(GetRotation() - glm::vec3(0.0f, 0.5f, 0.0f));
+		SetRotation(GetRotation() - glm::vec3(0.0f, 1.0f, 0.0f));
 	if (Input::IsKeyPressed(SDL_SCANCODE_RIGHT))
-		SetRotation(GetRotation() + glm::vec3(0.0f, 0.5f, 0.0f));
+		SetRotation(GetRotation() + glm::vec3(0.0f, 1.0f, 0.0f));
 }

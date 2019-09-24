@@ -33,49 +33,37 @@ void OpenGLRenderer::Render()
 		for (unsigned int i = 0; i < m_RendererQueue.size(); i++)
 		{
 			m_Shader->Bind();
+			m_VAO->Bind();
 			m_RendererQueue[i]->GetTexture()->Bind();
 
-			m_VAO->Bind();
+			m_VBO = VertexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetVertices().front(), m_RendererQueue[i]->GetModel()->GetVertices().size() * sizeof(&m_RendererQueue[i]->GetModel()->GetVertices().front()));
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (const void*)0);
 
-			if (!m_RendererQueue[i]->GetModel()->GetVertices().empty())
-			{
-				m_VBO = VertexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetVertices().front(), m_RendererQueue[i]->GetModel()->GetVertices().size() * sizeof(float));
-				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (const void*)0);
-			}
+			m_UV = VertexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetUVs().front(), m_RendererQueue[i]->GetModel()->GetUVs().size() * sizeof(&m_RendererQueue[i]->GetModel()->GetUVs().front()));
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, (const void*)0);
 
-			if (!m_RendererQueue[i]->GetModel()->GetUVs().empty())
-			{
-				m_TexCoord = VertexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetUVs().front(), m_RendererQueue[i]->GetModel()->GetUVs().size() * sizeof(float));
-				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, (const void*)0);
-			}
-
-			if (!m_RendererQueue[i]->GetModel()->GetNormals().empty())
-			{
-				m_Normal = VertexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetNormals().front(), m_RendererQueue[i]->GetModel()->GetNormals().size() * sizeof(float));
-				glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (const void*)0);
-			}
+			m_Normal = VertexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetNormals().front(), m_RendererQueue[i]->GetModel()->GetNormals().size() * sizeof(&m_RendererQueue[i]->GetModel()->GetNormals().front()));
+			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (const void*)0);
 
 			glEnableVertexAttribArray(0);
-			if (!m_RendererQueue[i]->GetModel()->GetUVs().empty())
-				glEnableVertexAttribArray(1);
-			if (!m_RendererQueue[i]->GetModel()->GetNormals().empty())
-				glEnableVertexAttribArray(2);
+			glEnableVertexAttribArray(1);
+			glEnableVertexAttribArray(2);
 
 			m_IBO = IndexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetVertexIndices().front(), m_RendererQueue[i]->GetModel()->GetVertexIndices().size() * sizeof(unsigned int));
 
-			m_ModelMatrix = glm::translate(glm::mat4(1.0f), m_RendererQueue[i]->GetPosition());
-			m_ModelMatrix = glm::rotate(m_ModelMatrix, glm::radians(m_RendererQueue[i]->GetRotation().x), glm::vec3(0.0f, 1.0f, 0.0f));
-			m_ModelMatrix = glm::rotate(m_ModelMatrix, glm::radians(m_RendererQueue[i]->GetRotation().y), glm::vec3(1.0f, 0.0f, 0.0f));
-			m_ModelMatrix = glm::scale(m_ModelMatrix, m_RendererQueue[i]->GetScale());
-			m_Shader->SetUniformMatrix4fv("modelMatrix", m_ModelMatrix);
+			m_Shader->SetUniformMatrix4fv("modelMatrix",
+				glm::translate(glm::mat4(1.0f), m_RendererQueue[i]->GetPosition()) *
+				glm::rotate(m_ModelMatrix, glm::radians(m_RendererQueue[i]->GetRotation().x), glm::vec3(0.0f, 1.0f, 0.0f)) *
+				glm::rotate(m_ModelMatrix, glm::radians(m_RendererQueue[i]->GetRotation().y), glm::vec3(1.0f, 0.0f, 0.0f)) *
+				glm::scale(m_ModelMatrix, m_RendererQueue[i]->GetScale())
+			);
+			m_ModelMatrix = glm::mat4(1.0f);
 
 			glDrawElements(GL_TRIANGLES, m_RendererQueue[i]->GetModel()->GetVertexIndices().size(), GL_UNSIGNED_INT, NULL);
 
 			glDisableVertexAttribArray(0);
-			if (!m_RendererQueue[i]->GetModel()->GetUVs().empty())
-				glDisableVertexAttribArray(1);
-			if (!m_RendererQueue[i]->GetModel()->GetNormals().empty())
-				glDisableVertexAttribArray(2);
+			glDisableVertexAttribArray(1);
+			glDisableVertexAttribArray(2);
 
 			m_IBO->Unbind();
 			m_VBO->Unbind();
