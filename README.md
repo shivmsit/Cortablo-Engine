@@ -1,6 +1,9 @@
 # Cortablo-Engine
 Game-Engine von Cortablo, welche OpenGL 3.3+ unterstützt.
 
+# ToDo
+- CMake einrichten.
+
 # Geplannte Funktionen
 - Vulkan-Support<br>
 
