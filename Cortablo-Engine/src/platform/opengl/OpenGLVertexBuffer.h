@@ -12,10 +12,12 @@
 class OpenGLVertexBuffer : public VertexBuffer
 {
 private:
-	uint32_t m_VertexBufferID;
+	GLuint m_VertexBufferID;
 public:
-	OpenGLVertexBuffer(float* vertices, uint32_t size);
+	OpenGLVertexBuffer(uint32_t size, void* data);
 	~OpenGLVertexBuffer();
+
+	void AddSubData(uint32_t offset, uint32_t size, void* data) override;
 
 	void Bind() override;
 	void Unbind() override;

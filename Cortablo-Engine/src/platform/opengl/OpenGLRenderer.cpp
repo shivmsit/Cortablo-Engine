@@ -9,20 +9,17 @@ OpenGLRenderer::OpenGLRenderer(Shader* shader) : m_Shader(shader)
 	Clear();
 
 	m_VAO = VertexArray::Init();
-	glGenBuffers(1, &m_VBO);
-	glGenBuffers(1, &m_UV);
-	glGenBuffers(1, &m_Normal);
 }
 
 OpenGLRenderer::~OpenGLRenderer()
 {
 	Clear();
 
-	glBindBuffer(GL_ARRAY_BUFFER, NULL);
+	m_VBO->Unbind();
+	m_VAO->Unbind();
 
-	glDeleteBuffers(1, &m_VBO);
-	glDeleteBuffers(1, &m_UV);
-	glDeleteBuffers(1, &m_Normal);
+	delete m_VBO;
+	delete m_VAO;
 }
 
 void OpenGLRenderer::Add(GameObject* gameObject)
@@ -45,19 +42,16 @@ void OpenGLRenderer::Render()
 			m_VAO->Bind();
 			m_RendererQueue[i]->GetTexture()->Bind();
 
-			glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-			glBufferData(GL_ARRAY_BUFFER, m_RendererQueue[i]->GetModel()->GetVertices().size() * sizeof(glm::vec3), &m_RendererQueue[i]->GetModel()->GetVertices().front(), GL_STATIC_DRAW);
-			//m_VBO = VertexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetVertices().front(), m_RendererQueue[i]->GetModel()->GetVertices().size() * sizeof(&m_RendererQueue[i]->GetModel()->GetVertices().front()));
+			m_VBO = VertexBuffer::Init(m_RendererQueue[i]->GetModel()->GetVertices().size() * sizeof(glm::vec3), &m_RendererQueue[i]->GetModel()->GetVertices().front());
+			m_VBO->AddSubData(m_RendererQueue[i]->GetModel()->GetVertices().size() * sizeof(glm::vec3), m_RendererQueue[i]->GetModel()->GetUVs().size() * sizeof(glm::vec2), &m_RendererQueue[i]->GetModel()->GetUVs().front());
+			m_VBO->AddSubData(sizeof(glm::vec3) + sizeof(glm::vec2), m_RendererQueue[i]->GetModel()->GetNormals().size() * sizeof(glm::vec3), &m_RendererQueue[i]->GetModel()->GetNormals().front());
+
+//		glBufferSubData(GL_ARRAY_BUFFER, m_RendererQueue[i]->GetModel()->GetVertices().size() * sizeof(glm::vec3), m_RendererQueue[i]->GetModel()->GetUVs().size() * sizeof(glm::vec2), &m_RendererQueue[i]->GetModel()->GetUVs().front());
+//			glBufferSubData(GL_ARRAY_BUFFER, sizeof(glm::vec3) + sizeof(glm::vec2), m_RendererQueue[i]->GetModel()->GetNormals().size() * sizeof(glm::vec3), &m_RendererQueue[i]->GetModel()->GetNormals().front());
+
+
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (const void*)0);
-
-			glBindBuffer(GL_ARRAY_BUFFER, m_UV);
-			glBufferData(GL_ARRAY_BUFFER, m_RendererQueue[i]->GetModel()->GetUVs().size() * sizeof(glm::vec2), &m_RendererQueue[i]->GetModel()->GetUVs().front(), GL_STATIC_DRAW);
-			//m_UV = VertexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetUVs().front(), m_RendererQueue[i]->GetModel()->GetUVs().size() * sizeof(&m_RendererQueue[i]->GetModel()->GetUVs().front()));
 			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (const void*)0);
-
-			glBindBuffer(GL_ARRAY_BUFFER, m_Normal);
-			glBufferData(GL_ARRAY_BUFFER, m_RendererQueue[i]->GetModel()->GetNormals().size() * sizeof(glm::vec3), &m_RendererQueue[i]->GetModel()->GetNormals().front(), GL_STATIC_DRAW);
-			//m_Normal = VertexBuffer::Init(&m_RendererQueue[i]->GetModel()->GetNormals().front(), m_RendererQueue[i]->GetModel()->GetNormals().size() * sizeof(&m_RendererQueue[i]->GetModel()->GetNormals().front()));
 			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (const void*)0);
 
 			glEnableVertexAttribArray(0);
@@ -81,8 +75,7 @@ void OpenGLRenderer::Render()
 			glDisableVertexAttribArray(2);
 
 			m_IBO->Unbind();
-			//m_VBO->Unbind();
-			glBindBuffer(GL_ARRAY_BUFFER, NULL);
+			m_VBO->Unbind();
 			m_VAO->Unbind();
 		}
 	}

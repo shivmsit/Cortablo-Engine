@@ -4,17 +4,26 @@
 
 #include "OpenGLVertexBuffer.h"
 
-OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size)
+OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size, void* data)
 {
 	glGenBuffers(1, &m_VertexBufferID);
 	Bind();
-	glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
+
+	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
 }
 
 OpenGLVertexBuffer::~OpenGLVertexBuffer()
 {
 	Unbind();
+
 	glDeleteBuffers(1, &m_VertexBufferID);
+}
+
+void OpenGLVertexBuffer::AddSubData(uint32_t offset, uint32_t size, void* data)
+{
+	Bind();
+
+	glBufferSubData(GL_ARRAY_BUFFER, offset, size, data);
 }
 
 void OpenGLVertexBuffer::Bind()

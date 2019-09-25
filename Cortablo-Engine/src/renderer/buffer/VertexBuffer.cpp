@@ -12,10 +12,10 @@
 
 #endif
 
-VertexBuffer* VertexBuffer::Init(float* vertices, uint32_t size)
+VertexBuffer* VertexBuffer::Init(uint32_t size, void* data)
 {
 #if RENDER_API == RENDERAPI_OPENGL
-	return new OpenGLVertexBuffer(vertices, size);
+	return new OpenGLVertexBuffer(size, data);
 #elif RENDER_API == RENDERAPI_VULKAN
 	return nullptr;
 #elif RENDER_API == RENDERAPI_DIRECTX
