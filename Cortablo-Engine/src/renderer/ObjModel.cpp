@@ -13,30 +13,21 @@ ObjModel::ObjModel(const std::string& filePath)
 	{
 		if (line.substr(0, 2) == "v ")
 		{
-			float vertex[3] = { };
-
-			sscanf_s(line.substr(2).c_str(), "%f %f %f\n", &vertex[0], &vertex[1], &vertex[2]);
-
-			for (unsigned int i = 0; i < 3; i++)
-				m_Vertices.push_back(vertex[i]);
+			glm::vec3 vertex = { };
+			sscanf_s(line.substr(2).c_str(), "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
+			m_Vertices.push_back(vertex);
 		}
 		else if (line.substr(0, 3) == "vt ")
 		{
-			float uv[2] = { };
-
-			sscanf_s(line.substr(2).c_str(), "%f %f\n", &uv[0], &uv[1]);
-
-			for (unsigned int i = 0; i < 2; i++)
-				m_UVs.push_back(uv[i]);
+			glm::vec2 uv = { };
+			sscanf_s(line.substr(2).c_str(), "%f %f\n", &uv.x, &uv.y);
+			m_UVs.push_back(uv);
 		}
 		else if (line.substr(0, 3) == "vn ")
 		{
-			float normal[3] = { };
-
-			sscanf_s(line.substr(2).c_str(), "%f %f %f\n", &normal[0], &normal[1], &normal[2]);
-
-			for (unsigned int i = 0; i < 3; i++)
-				m_Normals.push_back(normal[i]);
+			glm::vec3 normal = { };
+			sscanf_s(line.substr(2).c_str(), "%f %f %f\n", &normal.x, &normal.y, &normal.z);
+			m_Normals.push_back(normal);
 		}
 		else if (line.substr(0, 2) == "f ")
 		{
@@ -94,17 +85,17 @@ ObjModel::~ObjModel()
 	m_NormalIndices.clear();
 }
 
-std::vector<float> ObjModel::GetVertices()
+std::vector<glm::vec3> ObjModel::GetVertices()
 {
 	return m_Vertices;
 }
 
-std::vector<float> ObjModel::GetUVs()
+std::vector<glm::vec2> ObjModel::GetUVs()
 {
 	return m_UVs;
 }
 
-std::vector<float> ObjModel::GetNormals()
+std::vector<glm::vec3> ObjModel::GetNormals()
 {
 	return m_Normals;
 }

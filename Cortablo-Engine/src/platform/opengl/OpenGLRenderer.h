@@ -21,7 +21,7 @@ private:
 	Shader* m_Shader;
 
 	VertexArray* m_VAO;
-	VertexBuffer *m_VBO, *m_UV, *m_Normal;
+	GLuint m_VBO, m_UV, m_Normal;
 	IndexBuffer *m_IBO;
 
 	glm::mat4 m_ModelMatrix;

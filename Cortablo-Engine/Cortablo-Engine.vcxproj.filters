@@ -211,6 +211,8 @@
     <None Include="src\template\shaders\cubeMap.frag" />
     <None Include="src\template\shaders\main.frag" />
     <None Include="src\template\shaders\main.vert" />
+    <None Include="src\template\models\plane.mdl" />
+    <None Include="src\template\models\sphere.mdl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\CortabloEngine-ToDo.txt" />
