@@ -7,7 +7,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image/stb_image.h>
 
-OpenGLTexture::OpenGLTexture(int filter, const std::string& filePath)
+OpenGLTexture::OpenGLTexture(const std::string& filePath) : m_TextureTarget(GL_TEXTURE_2D)
 {
 	stbi_set_flip_vertically_on_load(1);
 
@@ -28,39 +28,70 @@ OpenGLTexture::OpenGLTexture(int filter, const std::string& filePath)
 	glGenTextures(1, &m_TextureID);
 	Bind();
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
+	glTexParameteri(m_TextureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(m_TextureTarget, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(m_TextureTarget, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(m_TextureTarget, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, m_TextureWidth, m_TextureHeight, 0, format, GL_UNSIGNED_BYTE, m_TextureBuffer);
-	glBindTexture(GL_TEXTURE_2D, NULL);
+	glTexImage2D(m_TextureTarget, 0, internalFormat, m_TextureWidth, m_TextureHeight, 0, format, GL_UNSIGNED_BYTE, m_TextureBuffer);
+	glBindTexture(m_TextureTarget, NULL);
 
 	if (m_TextureBuffer)
 		stbi_image_free(m_TextureBuffer);
 }
 
-OpenGLTexture::OpenGLTexture(int filter, int width, int height, void* data)
+OpenGLTexture::OpenGLTexture(int width, int height, void* data) : m_TextureTarget(GL_TEXTURE_2D)
 {
 	glGenTextures(1, &m_TextureID);
 	Bind();
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(m_TextureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(m_TextureTarget, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(m_TextureTarget, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(m_TextureTarget, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, (GLsizei)width, (GLsizei)height, 0, GL_RED, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(m_TextureTarget, 0, GL_RED, (GLsizei)width, (GLsizei)height, 0, GL_RED, GL_UNSIGNED_BYTE, data);
 
-	glBindTexture(GL_TEXTURE_2D, NULL);
+	glBindTexture(m_TextureTarget, NULL);
 }
 
-OpenGLTexture::OpenGLTexture(const std::string& filePath)
+OpenGLTexture::OpenGLTexture(std::vector<std::string> filePaths) : m_TextureTarget(GL_TEXTURE_CUBE_MAP)
 {
-	m_TextureBuffer = stbi_load(filePath.c_str(), &m_TextureWidth, &m_TextureHeight, &m_TextureBPP, 0);
+	glGenTextures(1, &m_TextureID);
+	Bind();
+
+	for (unsigned int i = 0; i < filePaths.size(); i++)
+	{
+		m_TextureBuffer = stbi_load(filePaths[i].c_str(), &m_TextureWidth, &m_TextureHeight, &m_TextureBPP, 0);
+
+		GLenum internalFormat = 0, format = 0;
+		if (m_TextureBPP == 4)
+		{
+			internalFormat = GL_RGBA8;
+			format = GL_RGBA;
+		}
+		else if (m_TextureBPP == 3)
+		{
+			internalFormat = GL_RGB8;
+			format = GL_RGB;
+		}
+
+		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, internalFormat, m_TextureWidth, m_TextureHeight, 0, format, GL_UNSIGNED_BYTE, m_TextureBuffer);
+
+		if (m_TextureBuffer)
+			stbi_image_free(m_TextureBuffer);
+	}
+
+	glTexParameteri(m_TextureTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(m_TextureTarget, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(m_TextureTarget, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(m_TextureTarget, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(m_TextureTarget, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+	Unbind();
 }
 
 OpenGLTexture::~OpenGLTexture()
@@ -75,12 +106,12 @@ OpenGLTexture::~OpenGLTexture()
 void OpenGLTexture::Bind(unsigned int slot)
 {
 	glActiveTexture(GL_TEXTURE0 + slot);
-	glBindTexture(GL_TEXTURE_2D, m_TextureID);
+	glBindTexture(m_TextureTarget, m_TextureID);
 }
 
 void OpenGLTexture::Unbind()
 {
-	glBindTexture(GL_TEXTURE_2D, NULL);
+	glBindTexture(m_TextureTarget, NULL);
 }
 
 int OpenGLTexture::GetWidth()

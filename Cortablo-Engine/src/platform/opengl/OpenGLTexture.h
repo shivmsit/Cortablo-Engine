@@ -17,10 +17,12 @@ private:
 	int m_TextureWidth, m_TextureHeight, m_TextureBPP;
 
 	unsigned char* m_TextureBuffer;
+
+	GLenum m_TextureTarget;
 public:
-	OpenGLTexture(int filter, const std::string& filePath);
-	OpenGLTexture(int filter, int width, int height, void* data);
 	OpenGLTexture(const std::string& filePath);
+	OpenGLTexture(int width, int height, void* data);
+	OpenGLTexture(std::vector<std::string> filePaths);
 	~OpenGLTexture();
 
 	void Bind(unsigned int slot = 0) override;

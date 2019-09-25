@@ -21,14 +21,15 @@ int main(int argc, char* argv[])
 	CortabloEngine::EngineParameters::Set("engineVersion", "alpha 0.1");
 
 	printf("[Engine] %s (Version: %s)\n", CortabloEngine::EngineParameters::Get<const char*>("engineName"), CortabloEngine::EngineParameters::Get<const char*>("engineVersion"));
-	   	  
+
 #ifdef USE_TEMPLATE
 	Template* game = new Template();
+
 	game->Update();
+
 	delete game;
 #endif
 
 	printf("[Engine] Engine terminated!\n");
-
 	return 0;
 }

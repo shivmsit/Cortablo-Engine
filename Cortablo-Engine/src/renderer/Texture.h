@@ -13,9 +13,9 @@
 class Texture
 {
 public:
-	static Texture* Init(int filter, const std::string& filePath);
-	static Texture* Init(int filter, int width, int height, void* data);
 	static Texture* Init(const std::string& filePath);
+	static Texture* Init(int width, int height, void* data);
+	static Texture* Init(std::vector<std::string> filePaths);
 	virtual ~Texture() = default;
 
 	virtual void Bind(unsigned int slot = 0) = 0;

@@ -198,8 +198,10 @@
   <ItemGroup>
     <None Include="src\template\maps\template.json" />
     <None Include="src\template\models\cube.mdl" />
-    <None Include="src\template\shaders\mainFragment.glsl" />
-    <None Include="src\template\shaders\mainVertex.glsl" />
+    <None Include="src\template\shaders\cubeMap.frag" />
+    <None Include="src\template\shaders\cubeMap.vert" />
+    <None Include="src\template\shaders\main.frag" />
+    <None Include="src\template\shaders\main.vert" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\CortabloEngine-ToDo.txt" />

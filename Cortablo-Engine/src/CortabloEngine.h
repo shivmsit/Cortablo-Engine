@@ -5,12 +5,13 @@
 #pragma once
 
 #include <iostream>
-
-#include <GL/glew.h>
-#include <vulkan/vulkan.h>
 #include <unordered_map>
 
-#define RENDERAPI_OPENGL  0
+// *****************| Cortablo-Engine |*****************
+// * Render-API										   *
+// *****************************************************
+
+#define RENDERAPI_OPENGL 0x0
 
 #define RENDER_API RENDERAPI_OPENGL
 
@@ -65,7 +66,7 @@ namespace CortabloEngine
 			delete m_Values<T>[name];
 		}
 	};
-
+		
 	class LaunchParameters
 	{
 	private:
