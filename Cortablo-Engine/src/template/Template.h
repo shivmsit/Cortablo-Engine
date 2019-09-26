@@ -12,7 +12,7 @@ class Template
 {
 private:
 	Window* m_Window;
-	Shader* m_MainShader;
+	Shader *m_MainShader, *m_CubeMapShader;
 	Renderer* m_WorldRenderer;
 	Map* m_Map;
 	PerspectiveCamera* m_Camera;

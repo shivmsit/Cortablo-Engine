@@ -9,7 +9,8 @@ Template::Template()
 
 	m_Window = Window::Init(CortabloEngine::GameParameters::Get<std::string>("gameName"), 1920, 1080);
 
-	m_MainShader = Shader::Init("src/template/shaders/cubeMap.vert", "src/template/shaders/cubeMap.frag");
+	m_MainShader = Shader::Init("src/template/shaders/main.vert", "src/template/shaders/main.frag");
+	m_CubeMapShader = Shader::Init("src/template/shaders/cubeMap.vert", "src/template/shaders/cubeMap.frag");
 	m_MainShader->Bind();
 
 	m_WorldRenderer = Renderer::Init(m_MainShader);
