@@ -213,6 +213,7 @@
     <None Include="src\template\shaders\main.vert" />
     <None Include="src\template\models\plane.mdl" />
     <None Include="src\template\models\sphere.mdl" />
+    <None Include="src\template\models\monkey.mdl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\CortabloEngine-ToDo.txt" />

@@ -7,9 +7,9 @@
       "position": [ 0.0, 0.0, 0.0 ],
       "rotation": [ 0.0, 0.0, 0.0 ],
       "scale": [ 10.0, 10.0, 10.0 ],
-      //"texture": "src/template/textures/template.png",
-      "texture": ["src/template/textures/template.png", "src/template/textures/template.png", "src/template/textures/template.png", "src/template/textures/template.png", "src/template/textures/template.png", "src/template/textures/template.png"],
-      "model": "src/template/models/sphere.mdl"
+      "texture": "src/template/textures/pineapple.png",
+     //"texture": ["src/template/textures/template.png", "src/template/textures/template.png", "src/template/textures/template.png", "src/template/textures/template.png", "src/template/textures/template.png", "src/template/textures/template.png"],
+      "model": "src/template/models/pineapple.mdl"
     }
   ]
 }

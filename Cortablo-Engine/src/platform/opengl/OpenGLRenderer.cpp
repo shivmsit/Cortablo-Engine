@@ -44,11 +44,7 @@ void OpenGLRenderer::Render()
 
 			m_VBO = VertexBuffer::Init(m_RendererQueue[i]->GetModel()->GetVertices().size() * sizeof(glm::vec3), &m_RendererQueue[i]->GetModel()->GetVertices().front());
 			m_VBO->AddSubData(m_RendererQueue[i]->GetModel()->GetVertices().size() * sizeof(glm::vec3), m_RendererQueue[i]->GetModel()->GetUVs().size() * sizeof(glm::vec2), &m_RendererQueue[i]->GetModel()->GetUVs().front());
-			m_VBO->AddSubData(sizeof(glm::vec3) + sizeof(glm::vec2), m_RendererQueue[i]->GetModel()->GetNormals().size() * sizeof(glm::vec3), &m_RendererQueue[i]->GetModel()->GetNormals().front());
-
-//		glBufferSubData(GL_ARRAY_BUFFER, m_RendererQueue[i]->GetModel()->GetVertices().size() * sizeof(glm::vec3), m_RendererQueue[i]->GetModel()->GetUVs().size() * sizeof(glm::vec2), &m_RendererQueue[i]->GetModel()->GetUVs().front());
-//			glBufferSubData(GL_ARRAY_BUFFER, sizeof(glm::vec3) + sizeof(glm::vec2), m_RendererQueue[i]->GetModel()->GetNormals().size() * sizeof(glm::vec3), &m_RendererQueue[i]->GetModel()->GetNormals().front());
-
+			m_VBO->AddSubData(m_RendererQueue[i]->GetModel()->GetVertices().size() * sizeof(glm::vec3) + m_RendererQueue[i]->GetModel()->GetUVs().size() * sizeof(glm::vec2), m_RendererQueue[i]->GetModel()->GetNormals().size() * sizeof(glm::vec3), &m_RendererQueue[i]->GetModel()->GetNormals().front());
 
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (const void*)0);
 			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (const void*)0);

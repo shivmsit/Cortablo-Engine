@@ -13,27 +13,27 @@ ObjModel::ObjModel(const std::string& filePath)
 	{
 		if (line.substr(0, 2) == "v ")
 		{
-			glm::vec3 vertex = { };
+			glm::vec3 vertex;
 			sscanf_s(line.substr(2).c_str(), "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
 			m_Vertices.push_back(vertex);
 		}
 		else if (line.substr(0, 3) == "vt ")
 		{
-			glm::vec2 uv = { };
+			glm::vec2 uv;
 			sscanf_s(line.substr(2).c_str(), "%f %f\n", &uv.x, &uv.y);
 			m_UVs.push_back(uv);
 		}
 		else if (line.substr(0, 3) == "vn ")
 		{
-			glm::vec3 normal = { };
+			glm::vec3 normal;
 			sscanf_s(line.substr(2).c_str(), "%f %f %f\n", &normal.x, &normal.y, &normal.z);
 			m_Normals.push_back(normal);
 		}
 		else if (line.substr(0, 2) == "f ")
 		{
-			unsigned int vertexIndex[3] = { };
-			unsigned int uvIndex[3] = { };
-			unsigned int normalIndex[3] = { };
+			unsigned int vertexIndex[3];
+			unsigned int uvIndex[3];
+			unsigned int normalIndex[3];
 
 			if (sscanf_s(line.substr(2).c_str(), "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vertexIndex[0], &uvIndex[0], &normalIndex[0], &vertexIndex[1], &uvIndex[1], &normalIndex[1], &vertexIndex[2], &uvIndex[2], &normalIndex[2]) == 9);
 			else if (sscanf_s(line.substr(2).c_str(), "%d %d %d\n", &vertexIndex[0], &vertexIndex[1], &vertexIndex[2]) == 3);
@@ -80,6 +80,7 @@ ObjModel::~ObjModel()
 	m_Vertices.clear();
 	m_UVs.clear();
 	m_Normals.clear();
+
 	m_VertexIndices.clear();
 	m_UVIndices.clear();
 	m_NormalIndices.clear();

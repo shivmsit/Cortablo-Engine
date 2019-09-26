@@ -198,6 +198,7 @@
   <ItemGroup>
     <None Include="src\template\maps\template.json" />
     <None Include="src\template\models\cube.mdl" />
+    <None Include="src\template\models\monkey.mdl" />
     <None Include="src\template\models\plane.mdl" />
     <None Include="src\template\models\sphere.mdl" />
     <None Include="src\template\shaders\cubeMap.frag" />
