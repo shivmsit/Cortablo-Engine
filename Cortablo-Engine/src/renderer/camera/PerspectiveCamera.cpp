@@ -4,6 +4,8 @@
 
 #include "PerspectiveCamera.h"
 
+#define ENABLE_MODELVIEWER 1
+
 PerspectiveCamera::PerspectiveCamera(float fov, float aspectRatio, const glm::vec3& position, const glm::vec3& rotation)
 {
 	m_ProjectionMatrix = glm::perspective(glm::radians(fov), aspectRatio, 1.0f, -1.0f);
@@ -43,29 +45,68 @@ const glm::vec3& PerspectiveCamera::GetRotation()
 
 void PerspectiveCamera::SetPosition(const glm::vec3& position)
 {
-	m_Position = position;
+	if (m_Move)
+	{
+		m_Position = position;
 
-	m_ViewMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(m_Rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
-	m_ViewMatrix = glm::rotate(m_ViewMatrix, glm::radians(m_Rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
-	m_ViewMatrix = glm::translate(m_ViewMatrix, m_Position);
+		if (m_Look)
+		{
+			m_ViewMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(m_Rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+			m_ViewMatrix = glm::rotate(m_ViewMatrix, glm::radians(m_Rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+			m_ViewMatrix = glm::translate(m_ViewMatrix, m_Position);
+		}
+		else
+		{
+			m_ViewMatrix = glm::translate(glm::mat4(1.0f), m_Position);
+			m_ViewMatrix = glm::rotate(m_ViewMatrix, glm::radians(m_Rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+			m_ViewMatrix = glm::rotate(m_ViewMatrix, glm::radians(m_Rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+		}
+	}
 }
 
 void PerspectiveCamera::SetRotation(const glm::vec3& rotation)
 {
-	m_Rotation = rotation;
+	if (m_Rotate)
+	{
+		m_Rotation = rotation;
 
-	m_ViewMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(m_Rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
-	m_ViewMatrix = glm::rotate(m_ViewMatrix, glm::radians(m_Rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
-	m_ViewMatrix = glm::translate(m_ViewMatrix, m_Position);
+		if (m_Look)
+		{
+			m_ViewMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(m_Rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+			m_ViewMatrix = glm::rotate(m_ViewMatrix, glm::radians(m_Rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+			m_ViewMatrix = glm::translate(m_ViewMatrix, m_Position);
 
-	if (m_Rotation.y > 360.0f)
-		m_Rotation.y = 0.0f;
-	if (m_Rotation.y < -360.0f)
-		m_Rotation.y = 0.0f;
-	if (m_Rotation.x > 90.0f)
-		m_Rotation.x = 90.0f;
-	if (m_Rotation.x < -90.0f)
-		m_Rotation.x = -90.0f;
+			if (m_Rotation.y > 360.0f)
+				m_Rotation.y = 0.0f;
+			if (m_Rotation.y < -360.0f)
+				m_Rotation.y = 0.0f;
+			if (m_Rotation.x > 90.0f)
+				m_Rotation.x = 90.0f;
+			if (m_Rotation.x < -90.0f)
+				m_Rotation.x = -90.0f;
+		}
+		else
+		{
+			m_ViewMatrix = glm::translate(glm::mat4(1.0f), m_Position);
+			m_ViewMatrix = glm::rotate(m_ViewMatrix, glm::radians(m_Rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+			m_ViewMatrix = glm::rotate(m_ViewMatrix, glm::radians(m_Rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+		}
+	}
+}
+
+void PerspectiveCamera::SetMove(bool move)
+{
+	m_Move = move;
+}
+
+void PerspectiveCamera::SetRotate(bool rotate)
+{
+	m_Rotate = rotate;
+}
+
+void PerspectiveCamera::SetLook(bool look)
+{
+	m_Look = look;
 }
 
 void PerspectiveCamera::Update()

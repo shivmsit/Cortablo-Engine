@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClCompile Include="src\audio\Audio.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\modelviewer\ModelViewer.cpp" />
     <ClCompile Include="src\platform\opengl\OpenGLContext.cpp" />
     <ClCompile Include="src\platform\opengl\OpenGLIndexBuffer.cpp" />
     <ClCompile Include="src\platform\opengl\OpenGLRenderCommand.cpp" />
@@ -166,6 +167,7 @@
   <ItemGroup>
     <ClInclude Include="src\audio\Audio.h" />
     <ClInclude Include="src\CortabloEngine.h" />
+    <ClInclude Include="src\modelviewer\ModelViewer.h" />
     <ClInclude Include="src\platform\opengl\OpenGLContext.h" />
     <ClInclude Include="src\platform\opengl\OpenGLIndexBuffer.h" />
     <ClInclude Include="src\platform\opengl\OpenGLRenderCommand.h" />
@@ -198,6 +200,7 @@
     <ClInclude Include="src\utils\Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="src\modelviewer\maps\modelMap.json" />
     <None Include="src\template\maps\template.json" />
     <None Include="src\template\models\cube.mdl" />
     <None Include="src\template\models\monkey.mdl" />

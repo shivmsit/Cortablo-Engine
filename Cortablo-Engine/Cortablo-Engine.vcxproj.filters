@@ -111,6 +111,9 @@
     <ClCompile Include="src\utils\Timer.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\modelviewer\ModelViewer.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\sys\FileSystem.h">
@@ -209,6 +212,9 @@
     <ClInclude Include="src\utils\Timer.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="src\modelviewer\ModelViewer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\template\maps\template.json" />
@@ -220,6 +226,7 @@
     <None Include="src\template\models\plane.mdl" />
     <None Include="src\template\models\sphere.mdl" />
     <None Include="src\template\models\monkey.mdl" />
+    <None Include="src\modelviewer\maps\modelMap.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\CortabloEngine-ToDo.txt" />

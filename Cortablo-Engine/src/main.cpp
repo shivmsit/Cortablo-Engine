@@ -7,8 +7,7 @@
 #include "CortabloEngine.h"
 #include "template/Template.h"
 #include "utils/Timer.h"
-
-#define USE_TEMPLATE 1
+#include "modelviewer/ModelViewer.h"
 
 int main(int argc, char* argv[])
 {
@@ -25,8 +24,14 @@ int main(int argc, char* argv[])
 
 	printf("[Engine] %s (Version: %s)\n", CortabloEngine::EngineParameters::Get<const char*>("engineName"), CortabloEngine::EngineParameters::Get<const char*>("engineVersion"));
 
-#ifdef USE_TEMPLATE
+#if 0
 	Template* game = new Template();
+
+	game->Update();
+
+	delete game;
+#else
+	ModelViewer* game = new ModelViewer();
 
 	game->Update();
 
