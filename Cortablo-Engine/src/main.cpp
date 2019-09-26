@@ -6,11 +6,14 @@
 
 #include "CortabloEngine.h"
 #include "template/Template.h"
+#include "utils/Timer.h"
 
 #define USE_TEMPLATE 1
 
 int main(int argc, char* argv[])
 {
+	Timer* timer = new Timer();
+
 	for (int i = 1; i < argc - 1; i++)
 	{
 		if (argv[i][0] != '-') i++;
@@ -31,5 +34,9 @@ int main(int argc, char* argv[])
 #endif
 
 	printf("[Engine] Engine terminated!\n");
+
+	printf("[Engine] Runtime: %fs\n", timer->GetElapsedSeconds());
+	delete timer;
+
 	return 0;
 }

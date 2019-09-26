@@ -161,6 +161,7 @@
     <ClCompile Include="src\utils\Lua.cpp" />
     <ClCompile Include="src\utils\Map.cpp" />
     <ClCompile Include="src\renderer\ObjModel.cpp" />
+    <ClCompile Include="src\utils\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\audio\Audio.h" />
@@ -194,6 +195,7 @@
     <ClInclude Include="src\utils\Lua.h" />
     <ClInclude Include="src\utils\Map.h" />
     <ClInclude Include="src\renderer\ObjModel.h" />
+    <ClInclude Include="src\utils\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\template\maps\template.json" />

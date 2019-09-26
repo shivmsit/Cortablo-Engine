@@ -108,6 +108,9 @@
     <ClCompile Include="src\platform\opengl\OpenGLWindow.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\utils\Timer.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\sys\FileSystem.h">
@@ -201,6 +204,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="src\platform\opengl\OpenGLWindow.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\Timer.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

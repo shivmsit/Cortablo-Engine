@@ -22,6 +22,7 @@ Template::Template()
 
 	m_RenderCommand = RenderCommand::Init();
 	m_RenderCommand->SetClearColor(glm::vec4(0.4f, 0.4f, 0.7f, 1.0f));
+
 }
 
 Template::~Template()
