@@ -1,17 +1,17 @@
 # Cortablo-Engine
-Game-Engine von Cortablo, welche OpenGL 3.3+ unterstützt.
+Game-Engine which supporting OpenGL 3.3+.
 
-### Diese Engine darf von jedem verwendet werden, solange dies ein nicht kommerzielles-Projekt ist. ###
-Bei Fragen: CortabloEngine@gmail.com
+### This engine may be used by anyone, as long as this is a non-commercial project. ###
+Contact: CortabloEngine@gmail.com
 
 # ToDo
-- CMake einrichten.
+- Setup CMake
 
-# Geplannte Funktionen
+# Planned features
 - Vulkan-Support<br>
 
-# Bekannte Probleme
-- Wavefront-Model UVs nicht korrekt.
+# Known Bugs
+- Wavefront Model UVs are not loaded correctly.
 
 # Dependencies
 SDL2 -> https://www.libsdl.org<br>
