@@ -18,6 +18,7 @@ Parts of the Cortablo engine source code is inspired by Hazel from TheCherno
 
 # Dependencies
 SDL2 -> https://www.libsdl.org<br>
+SDL2_mixer -> https://www.libsdl.org/projects/SDL_mixer<br>
 GLEW -> http://glew.sourceforge.net/<br>
 GLM -> https://glm.g-truc.net/<br>
 stb_image -> https://github.com/nothings/stb/blob/master/stb_image.h<br>
