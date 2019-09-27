@@ -34,7 +34,7 @@ workspace "Cortablo-Engine"
 		
 		LibDirs = {}
 		LibDirs["SDL2"] = "%{prj.name}/vendor/SDL2/lib/%{cfg.architecture}"
-		LibDirs["GLEW"] = "%{prj.name}/vendor/GLEW/lib/Release/Win32"
+		LibDirs["GLEW"] = "%{prj.name}/vendor/GLEW/lib/Release/%{cfg.architecture}"
 		LibDirs["FreeType2"] = "%{prj.name}/vendor/FreeType2/lib/%{cfg.architecture}/%{cfg.buildcfg}"
 		LibDirs["jsoncpp"] = "%{prj.name}/vendor/jsoncpp/lib/%{cfg.architecture}/%{cfg.buildcfg}"
 		LibDirs["lua"] = "%{prj.name}/vendor/lua/lib/%{cfg.architecture}"

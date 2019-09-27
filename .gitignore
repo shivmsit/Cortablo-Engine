@@ -344,4 +344,4 @@ healthchecksdb
 /Cortablo-Engine.sln
 /Cortablo-Engine/Cortablo-Engine.vcxproj.filters
 /Cortablo-Engine/Cortablo-Engine.vcxproj
-/bin-int/Cortablo-Engine-x86-Debug
+/bin-int/
