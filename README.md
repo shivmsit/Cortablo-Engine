@@ -5,7 +5,7 @@ Game-Engine which supporting OpenGL 3.3+.
 Contact: CortabloEngine@gmail.com
 
 # ToDo
-- Setup CMake
+- Setup Premake
 
 # Planned features
 - Vulkan-Support<br>
