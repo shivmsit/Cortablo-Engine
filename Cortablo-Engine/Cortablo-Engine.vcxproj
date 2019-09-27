@@ -131,6 +131,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\audio\Audio.cpp" />
+    <ClCompile Include="src\event\AppRenderEvent.cpp" />
+    <ClCompile Include="src\event\AppTickEvent.cpp" />
+    <ClCompile Include="src\event\AppUpdateEvent.cpp" />
+    <ClCompile Include="src\event\Event.cpp" />
+    <ClCompile Include="src\event\EventDispatcher.cpp" />
+    <ClCompile Include="src\event\KeyEvent.cpp" />
+    <ClCompile Include="src\event\KeyPressedEvent.cpp" />
+    <ClCompile Include="src\event\KeyReleasedEvent.cpp" />
+    <ClCompile Include="src\event\KeyTypedEvent.cpp" />
+    <ClCompile Include="src\event\MouseButtonEvent.cpp" />
+    <ClCompile Include="src\event\MouseButtonPressedEvent.cpp" />
+    <ClCompile Include="src\event\MouseButtonReleasedEvent.cpp" />
+    <ClCompile Include="src\event\MouseMovedEvent.cpp" />
+    <ClCompile Include="src\event\MouseScrolledEvent.cpp" />
+    <ClCompile Include="src\event\WindowCloseEvent.cpp" />
+    <ClCompile Include="src\event\WindowResizeEvent.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\modelviewer\ModelViewer.cpp" />
     <ClCompile Include="src\platform\opengl\OpenGLContext.cpp" />
@@ -167,6 +183,22 @@
   <ItemGroup>
     <ClInclude Include="src\audio\Audio.h" />
     <ClInclude Include="src\CortabloEngine.h" />
+    <ClInclude Include="src\event\AppRenderEvent.h" />
+    <ClInclude Include="src\event\AppTickEvent.h" />
+    <ClInclude Include="src\event\AppUpdateEvent.h" />
+    <ClInclude Include="src\event\Event.h" />
+    <ClInclude Include="src\event\EventDispatcher.h" />
+    <ClInclude Include="src\event\KeyEvent.h" />
+    <ClInclude Include="src\event\KeyPressedEvent.h" />
+    <ClInclude Include="src\event\KeyReleasedEvent.h" />
+    <ClInclude Include="src\event\KeyTypedEvent.h" />
+    <ClInclude Include="src\event\MouseButtonEvent.h" />
+    <ClInclude Include="src\event\MouseButtonPressedEvent.h" />
+    <ClInclude Include="src\event\MouseButtonReleasedEvent.h" />
+    <ClInclude Include="src\event\MouseMovedEvent.h" />
+    <ClInclude Include="src\event\MouseScrolledEvent.h" />
+    <ClInclude Include="src\event\WindowCloseEvent.h" />
+    <ClInclude Include="src\event\WindowResizeEvent.h" />
     <ClInclude Include="src\modelviewer\ModelViewer.h" />
     <ClInclude Include="src\platform\opengl\OpenGLContext.h" />
     <ClInclude Include="src\platform\opengl\OpenGLIndexBuffer.h" />
