@@ -4,6 +4,9 @@ Game-Engine which supporting OpenGL 3.3+.
 ### This engine may be used by anyone, as long as this is a non-commercial project. ###
 Contact: CortabloEngine@gmail.com
 
+# Important
+Parts of the Cortablo engine source code is inspired by Hazel from TheCherno
+
 # ToDo
 - Setup Premake
 
