@@ -11,6 +11,8 @@ Contact: CortabloEngine@gmail.com
 
 # Planned features
 - Vulkan-Support<br>
+- ARM64-Support<br>
+- (Possibly) PlayStation 2-Port
 
 # Known Bugs
 - Wavefront Model UVs are not loaded correctly.
