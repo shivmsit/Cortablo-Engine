@@ -49,6 +49,8 @@ void ModelViewer::Update()
 	{
 		m_RenderCommand->Clear();
 
+		m_Camera->SetRotation(glm::vec3(m_Camera->GetRotation().x, m_Camera->GetRotation().y + 1.0f, m_Camera->GetRotation().z));
+
 		m_ModelRenderer->Render();
 		m_ModelRenderer->Update();
 
