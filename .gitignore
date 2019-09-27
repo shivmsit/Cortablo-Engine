@@ -341,3 +341,6 @@ healthchecksdb
 
 # Cortablo-Engine
 /Cortablo-Engine/vendor
+/Cortablo-Engine.sln
+/Cortablo-Engine/Cortablo-Engine.vcxproj.filters
+/Cortablo-Engine/Cortablo-Engine.vcxproj
